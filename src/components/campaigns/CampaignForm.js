@@ -1,10 +1,9 @@
 import React, { Component, useState } from "react";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { createPost } from "../actions/postActions";
+import { createCampaign } from "../../actions/campaignActions";
 
-function PostForm() {
-  const [newPost, setNewPost] = useState({
+function CampaignForm() {
+  const [newCampaign, setNewCampaign] = useState({
     title: "",
     body: ""
   });
@@ -12,8 +11,8 @@ function PostForm() {
   const dispatch = useDispatch();
 
   const onChange = e => {
-    setNewPost({
-      ...newPost,
+    setNewCampaign({
+      ...newCampaign,
       [e.target.name]: e.target.value
     });
   };
@@ -22,13 +21,13 @@ function PostForm() {
     e.preventDefault();
 
     const post = {
-      title: newPost.title,
-      body: newPost.body
+      title: newCampaign.title,
+      body: newCampaign.body
     };
 
-    dispatch(createPost(post));
+    dispatch(createCampaign(post));
 
-    setNewPost({
+    setNewCampaign({
       title: "",
       body: ""
     });
@@ -45,14 +44,14 @@ function PostForm() {
             type="text"
             name="title"
             onChange={onChange}
-            value={newPost.title}
+            value={newCampaign.title}
           />
         </div>
         <br />
         <div>
           <label>Body: </label>
           <br />
-          <textarea name="body" onChange={onChange} value={newPost.body} />
+          <textarea name="body" onChange={onChange} value={newCampaign.body} />
         </div>
         <br />
         <button type="submit">Submit</button>
@@ -61,8 +60,4 @@ function PostForm() {
   );
 }
 
-PostForm.propTypes = {
-  //createPost: PropTypes.func.isRequired
-};
-
-export default PostForm;
+export default CampaignForm;

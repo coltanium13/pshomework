@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import postReducer from './postReducer';
+import { combineReducers } from "redux";
+import campaignReducer from "./campaignReducer";
 
 export default combineReducers({
-  posts: postReducer
+  campaigns: campaignReducer
 });

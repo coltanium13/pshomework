@@ -1,21 +1,21 @@
-import { FETCH_POSTS, NEW_POST } from "../actions/types";
+import { FETCH_CAMPAIGNS, NEW_CAMPAIGN } from "../actions/types";
 
 const initialState = {
-  items: [],
-  item: {}
+  campaigns: [],
+  campaign: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_POSTS:
+    case FETCH_CAMPAIGNS:
       return {
         ...state,
-        items: action.payload
+        campaigns: action.payload
       };
-    case NEW_POST:
+    case NEW_CAMPAIGN:
       return {
         ...state,
-        item: action.payload
+        campaign: action.payload
       };
     default:
       return state;

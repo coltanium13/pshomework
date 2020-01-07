@@ -1,7 +1,7 @@
-import { FETCH_POSTS, NEW_POST } from "./types";
+import { FETCH_CAMPAIGNS, NEW_CAMPAIGN } from "./types";
 import _ from "lodash";
 
-export const fetchPosts = newItem => dispatch => {
+export const fetchCampaigns = newItem => dispatch => {
   console.log(JSON.stringify("newItem: " + JSON.stringify(newItem)));
   fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
     .then(res => res.json())
@@ -16,13 +16,13 @@ export const fetchPosts = newItem => dispatch => {
     .then(allPosts => {
       console.log("allPosts" + JSON.stringify(allPosts));
       dispatch({
-        type: FETCH_POSTS,
+        type: FETCH_CAMPAIGNS,
         payload: allPosts
       });
     });
 };
 
-export const createPost = postData => dispatch => {
+export const createCampaign = postData => dispatch => {
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     headers: {
@@ -33,7 +33,7 @@ export const createPost = postData => dispatch => {
     .then(res => res.json())
     .then(post =>
       dispatch({
-        type: NEW_POST,
+        type: NEW_CAMPAIGN,
         payload: post
       })
     );
