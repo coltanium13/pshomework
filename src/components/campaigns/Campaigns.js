@@ -6,6 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import CampaignTable from "./CampaignTable";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary
+  },
+  headings: {
+    color: "primary"
   }
 }));
 
@@ -29,18 +34,20 @@ const Campaigns = () => {
     dispatch(fetchCampaigns(campaign));
   }, [dispatch, campaign]);
 
-  const allCampaigns = campaigns.map((campaign, index) => (
-    <Grid item key={campaign.id} item xs={12}>
-      <h3>{campaign.name}</h3>
-      <p>{campaign.text}</p>
-    </Grid>
-  ));
+  // const allCampaigns = campaigns.map((campaign, index) => (
+  //   <Grid item key={campaign.id} item xs={12}>
+  //     <h3>{campaign.name}</h3>
+  //     <p>{campaign.text}</p>
+  //   </Grid>
+  // ));
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3} alignItems="center">
         <Grid item xs={6}>
-          <h1>Campaigns</h1>
+          <Typography variant="h4" gutterBottom>
+            Campaigns
+          </Typography>
         </Grid>
         <Grid item xs={6} align="center">
           <Button
@@ -55,7 +62,22 @@ const Campaigns = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        {allCampaigns}
+        <Grid item xs={6}>
+          <Typography variant="h6" className="headings" gutterBottom>
+            Open Campaigns
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <CampaignTable campaigns={campaigns} status="Preview" />
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h6" className="headings" gutterBottom>
+            Sent Campaigns
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <CampaignTable campaigns={campaigns} status="Sent" />
+        </Grid>
       </Grid>
     </div>
   );
