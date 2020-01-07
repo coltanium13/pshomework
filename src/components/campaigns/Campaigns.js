@@ -4,7 +4,7 @@ import { fetchCampaigns } from "../../actions/campaignActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { Button } from "@material-ui/core";
+import { Button, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -27,18 +27,18 @@ const Campaigns = () => {
 
   useEffect(() => {
     dispatch(fetchCampaigns(campaign));
-  }, [campaign]);
+  }, [dispatch, campaign]);
 
   const allCampaigns = campaigns.map((campaign, index) => (
-    <div key={index}>
+    <Grid item key={campaign.id} item xs={12}>
       <h3>{campaign.name}</h3>
       <p>{campaign.text}</p>
-    </div>
+    </Grid>
   ));
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} alignItems="center">
         <Grid item xs={6}>
           <h1>Campaigns</h1>
         </Grid>
@@ -52,18 +52,10 @@ const Campaigns = () => {
             Create New Campaign
           </Button>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
+        <Grid item xs={12}>
+          <Divider />
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
+        {allCampaigns}
       </Grid>
     </div>
   );
