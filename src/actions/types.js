@@ -1,0 +1,2 @@
+export const FETCH_CAMPAIGNS = "FETCH_CAMPAIGNS";
+export const NEW_CAMPAIGN = "NEW_CAMPAIGN";
