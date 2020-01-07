@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Campaigns from "./components/campaigns/Campaigns";
-import CampaignsForm from "./components/campaigns/CampaignForm";
+import CampaignForm from "./components/campaigns/CampaignForm";
 import Layout from "./components/layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import Segments from "./components/segments/Segments";
@@ -22,6 +22,7 @@ class App extends Component {
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/segments" component={Segments} />
               <Route exact path="/campaigns" component={Campaigns} />
+              <Route exact path="/create-campaign" component={CampaignForm} />
             </Fragment>
           </Layout>
         </Router>

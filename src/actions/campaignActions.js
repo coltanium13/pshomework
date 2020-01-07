@@ -1,22 +1,15 @@
 import { FETCH_CAMPAIGNS, NEW_CAMPAIGN } from "./types";
 import _ from "lodash";
+import axios from "axios";
 
-export const fetchCampaigns = newItem => dispatch => {
-  console.log(JSON.stringify("newItem: " + JSON.stringify(newItem)));
-  fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
-    .then(res => res.json())
-    .then(posts => {
-      if (!_.isEmpty(newItem)) {
-        posts.unshift(newItem);
-      }
-      return posts;
-    })
-    .then(allPosts => {
-      dispatch({
-        type: FETCH_CAMPAIGNS,
-        payload: allPosts
-      });
+export const fetchCampaigns = () => dispatch => {
+  axios.get("data/campaigns.json").then(res => {
+    console.log(JSON.stringify("data: "), res.data);
+    dispatch({
+      type: FETCH_CAMPAIGNS,
+      payload: res.data.campaigns
     });
+  });
 };
 
 export const createCampaign = postData => dispatch => {
@@ -35,3 +28,5 @@ export const createCampaign = postData => dispatch => {
       })
     );
 };
+
+export const updateCampaign = campaign => dispatch => {};
