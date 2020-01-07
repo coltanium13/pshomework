@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Campaigns from "./components/campaigns/Campaigns";
 import CampaignsForm from "./components/campaigns/CampaignForm";
+import Layout from "./components/layout";
+import Dashboard from "./components/dashboard/Dashboard";
+import Segments from "./components/segments/Segments";
 
 import store from "./store";
 
@@ -12,15 +16,15 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <CampaignsForm />
-          <hr />
-          <Campaigns />
-        </div>
+        <Router>
+          <Layout>
+            <Fragment>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/segments" component={Segments} />
+              <Route exact path="/campaigns" component={Campaigns} />
+            </Fragment>
+          </Layout>
+        </Router>
       </Provider>
     );
   }

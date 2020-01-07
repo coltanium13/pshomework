@@ -2,7 +2,7 @@ import React, { Component, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCampaigns } from "../../actions/campaignActions";
 
-function Campaigns() {
+const Campaigns = () => {
   const dispatch = useDispatch();
 
   const { campaigns, campaign } = useSelector(state => ({
@@ -28,6 +28,6 @@ function Campaigns() {
       {postItems}
     </div>
   );
-}
+};
 
 export default Campaigns;

@@ -7,14 +7,11 @@ export const fetchCampaigns = newItem => dispatch => {
     .then(res => res.json())
     .then(posts => {
       if (!_.isEmpty(newItem)) {
-        console.log("adding new item: " + JSON.stringify(newItem));
-        console.log("...posts: " + JSON.stringify(posts));
         posts.unshift(newItem);
       }
       return posts;
     })
     .then(allPosts => {
-      console.log("allPosts" + JSON.stringify(allPosts));
       dispatch({
         type: FETCH_CAMPAIGNS,
         payload: allPosts
