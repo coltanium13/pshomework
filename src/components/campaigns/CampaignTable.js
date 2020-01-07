@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -26,18 +27,9 @@ const useStyles = makeStyles(theme => ({
 const CampaignTable = ({ campaigns, status, history }) => {
   const classes = useStyles();
 
-  const handleEdit = id => {
-    console.log("edit id: ", id);
-    //todo: make route /edit-campaign/:id
-    history.push("/");
-  };
-
-  const handleDelete = id => {
-    console.log("del id: ", id);
-    //todo: make route /delete-campaign/:id
-    //`/profile/${id}`
-    history.push("/");
-  };
+  //todo: make route /edit-campaign/:id
+  //todo: make route /delete-campaign/:id
+  //`/profile/${id}`
 
   return (
     <TableContainer component={Paper}>
@@ -68,14 +60,16 @@ const CampaignTable = ({ campaigns, status, history }) => {
                     variant="contained"
                     color="primary"
                     className={classes.btn}
-                    onClick={() => handleEdit(campaign.id)}
+                    component={Link}
+                    to="/"
                   >
                     Edit
                   </Button>
                   <Button
                     variant="outlined"
                     color="secondary"
-                    onClick={() => handleDelete(campaign.id)}
+                    component={Link}
+                    to="/"
                   >
                     Del
                   </Button>
