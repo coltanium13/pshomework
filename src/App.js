@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Campaigns from "./components/campaigns/Campaigns";
 import CreateCampaignForm from "./components/campaigns/CreateCampaignForm";
