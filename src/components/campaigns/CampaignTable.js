@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,7 +10,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import { deleteCampaign } from "../../actions/campaignActions";
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -24,12 +27,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CampaignTable = ({ campaigns, status, history }) => {
+const CampaignTable = ({ campaigns, status }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
-  //todo: make route /edit-campaign/:id
-  //todo: make route /delete-campaign/:id
-  //`/profile/${id}`
+  const handleDeleteCampaign = id => {
+    if (window.confirm("Are you sure you want to delete this Campaign?")) {
+      dispatch(deleteCampaign(id));
+    }
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -52,7 +58,12 @@ const CampaignTable = ({ campaigns, status, history }) => {
             .map(campaign => (
               <TableRow key={campaign.id}>
                 <TableCell component="th" scope="row">
-                  {campaign.name}
+                  <Link
+                    component={RouterLink}
+                    to={`/view-campaign/${campaign.id}`}
+                  >
+                    {campaign.name}
+                  </Link>
                 </TableCell>
                 <TableCell align="center">{campaign.status}</TableCell>
                 <TableCell align="center">
@@ -60,16 +71,15 @@ const CampaignTable = ({ campaigns, status, history }) => {
                     variant="contained"
                     color="primary"
                     className={classes.btn}
-                    component={Link}
-                    to="/"
+                    component={RouterLink}
+                    to={`/edit-campaign/${campaign.id}`}
                   >
                     Edit
                   </Button>
                   <Button
                     variant="outlined"
                     color="secondary"
-                    component={Link}
-                    to="/"
+                    onClick={() => handleDeleteCampaign(campaign.id)}
                   >
                     Del
                   </Button>

@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createCampaign } from "../../actions/campaignActions";
 
-function CampaignForm() {
+function CreateCampaignForm() {
   const [newCampaign, setNewCampaign] = useState({
     title: "",
     body: ""
@@ -60,4 +60,4 @@ function CampaignForm() {
   );
 }
 
-export default CampaignForm;
+export default CreateCampaignForm;

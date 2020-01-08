@@ -1,4 +1,9 @@
-import { FETCH_CAMPAIGNS, NEW_CAMPAIGN, GET_CAMPAIGN } from "../actions/types";
+import {
+  FETCH_CAMPAIGNS,
+  NEW_CAMPAIGN,
+  GET_CAMPAIGN,
+  DELETE_CAMPAIGN
+} from "../actions/types";
 
 const initialState = {
   campaigns: [],
@@ -17,10 +22,19 @@ export default function(state = initialState, action) {
         ...state,
         campaign: action.payload
       };
-    case GET_CAMPAIGN:
+    case GET_CAMPAIGN: {
+      console.log("get camp: ", JSON.stringify(action.payload));
       return {
         ...state,
         campaign: action.payload
+      };
+    }
+    case DELETE_CAMPAIGN:
+      return {
+        ...state,
+        campaigns: [
+          ...state.campaigns.filter(campaign => campaign.id !== action.payload)
+        ]
       };
     default:
       return state;

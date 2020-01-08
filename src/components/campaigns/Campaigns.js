@@ -1,8 +1,7 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCampaigns } from "../../actions/campaignActions";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -31,15 +30,8 @@ const Campaigns = () => {
   }));
 
   useEffect(() => {
-    dispatch(fetchCampaigns(campaign));
-  }, [dispatch, campaign]);
-
-  // const allCampaigns = campaigns.map((campaign, index) => (
-  //   <Grid item key={campaign.id} item xs={12}>
-  //     <h3>{campaign.name}</h3>
-  //     <p>{campaign.text}</p>
-  //   </Grid>
-  // ));
+    dispatch(fetchCampaigns());
+  }, [dispatch, fetch]);
 
   return (
     <div className={classes.root}>
