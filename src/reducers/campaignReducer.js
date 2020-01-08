@@ -4,9 +4,10 @@ import {
   GET_CAMPAIGN,
   DELETE_CAMPAIGN
 } from "../actions/types";
+import data from "./data/campaigns.json";
 
 const initialState = {
-  campaigns: [],
+  campaigns: data.campaigns,
   campaign: {}
 };
 
@@ -14,19 +15,20 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_CAMPAIGNS:
       return {
-        ...state,
-        campaigns: action.payload
+        ...state
       };
     case NEW_CAMPAIGN:
       return {
         ...state,
         campaign: action.payload,
-        campaigns: [...state, action.payload]
+        campaigns: [...state.campaigns, action.payload]
       };
     case GET_CAMPAIGN: {
       return {
         ...state,
-        campaign: action.payload
+        campaign: {
+          ...state.campaigns.find(campaign => campaign.id == action.payload)
+        }
       };
     }
     case DELETE_CAMPAIGN:

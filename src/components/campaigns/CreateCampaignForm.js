@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createCampaign } from "../../actions/campaignActions";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,8 +37,10 @@ const CreateCampaignForm = () => {
     e.preventDefault();
 
     const campaign = {
-      title: newCampaign.name,
-      body: newCampaign.text
+      name: newCampaign.name,
+      text: newCampaign.text,
+      status: "Preview",
+      id: uuid()
     };
 
     dispatch(createCampaign(campaign));
@@ -61,9 +64,8 @@ const CreateCampaignForm = () => {
             id="name-input"
             label="Required"
             variant="outlined"
-            defaultValue="New Campaign"
             onChange={onChange}
-            value={newCampaign.title}
+            value={newCampaign.name}
           />
         </div>
         <br />
