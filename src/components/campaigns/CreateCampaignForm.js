@@ -5,12 +5,12 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Typography from "@material-ui/core/Typography";
-import { Button, Divider } from "@material-ui/core"
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { Button, Divider } from "@material-ui/core";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
@@ -26,11 +26,14 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 120
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
+  btn: {
+    margin: theme.spacing(1)
+  }
 }));
 
 const CreateCampaignForm = () => {
@@ -66,6 +69,7 @@ const CreateCampaignForm = () => {
       text: newCampaign.text,
       status: "Preview",
       segment_id: newCampaign.segment_id,
+      media: newCampaign.media,
       id: uuid()
     };
 
@@ -96,42 +100,67 @@ const CreateCampaignForm = () => {
           />
         </div>
         <div>
-        <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel ref={inputLabel}>
-          Segment
-        </InputLabel>
-        <Select
-          labelId="segment-select-label"
-          id="segment-select"
-          name="segment_id"
-          value={newCampaign.segment_id}
-          onChange={onChange}
-          labelWidth={labelWidth}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel ref={inputLabel}>Segment</InputLabel>
+            <Select
+              labelId="segment-select-label"
+              id="segment-select"
+              name="segment_id"
+              value={newCampaign.segment_id || ''}
+              onChange={onChange}
+              labelWidth={labelWidth}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <input
+            accept="image/*"
+            className={classes.input}
+            style={{ display: "none" }}
+            id="raised-button-file"
+            name="media"
+            value={newCampaign.media}
+            multiple
+            type="file"
+            onChange={onChange}
+          />
+          <label htmlFor="raised-button-file">
+            <Button
+              variant="contained"
+              component="span"
+              color="secondary"
+              className={classes.btn}
+            >
+              Add Media
+            </Button>
+          </label>
         </div>
         <div>
           <TextareaAutosize
-          className={classes.textArea}
+            className={classes.textArea}
+            name="text"
+            value={newCampaign.text}
             aria-label="Message Text"
             rowsMin={3}
             placeholder="Message Text"
+            onChange={onChange}
           />
         </div>
         <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
+          className={classes.btn}
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );
