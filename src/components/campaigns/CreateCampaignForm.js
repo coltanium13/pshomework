@@ -1,11 +1,26 @@
 import React, { Component, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createCampaign } from "../../actions/campaignActions";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
-function CreateCampaignForm() {
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: 200
+    }
+  }
+}));
+
+const CreateCampaignForm = () => {
+  const classes = useStyles();
   const [newCampaign, setNewCampaign] = useState({
-    title: "",
-    body: ""
+    name: "",
+    text: "",
+    media: "",
+    status: "Preview",
+    segment_id: ""
   });
 
   const dispatch = useDispatch();
@@ -20,29 +35,33 @@ function CreateCampaignForm() {
   const onSubmit = e => {
     e.preventDefault();
 
-    const post = {
-      title: newCampaign.title,
-      body: newCampaign.body
+    const campaign = {
+      title: newCampaign.name,
+      body: newCampaign.text
     };
 
-    dispatch(createCampaign(post));
+    dispatch(createCampaign(campaign));
 
     setNewCampaign({
-      title: "",
-      body: ""
+      name: "",
+      text: "",
+      media: ""
     });
   };
 
   return (
     <div>
-      <h1>Add Post</h1>
+      <h1>Add Campaign</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label>Title: </label>
           <br />
-          <input
-            type="text"
-            name="title"
+          <TextField
+            required
+            name="name"
+            id="name-input"
+            label="Required"
+            variant="outlined"
+            defaultValue="New Campaign"
             onChange={onChange}
             value={newCampaign.title}
           />
@@ -58,6 +77,6 @@ function CreateCampaignForm() {
       </form>
     </div>
   );
-}
+};
 
 export default CreateCampaignForm;

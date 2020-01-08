@@ -17,21 +17,12 @@ export const fetchCampaigns = () => dispatch => {
   });
 };
 
-export const createCampaign = postData => dispatch => {
-  fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body: JSON.stringify(postData)
-  })
-    .then(res => res.json())
-    .then(post =>
-      dispatch({
-        type: NEW_CAMPAIGN,
-        payload: post
-      })
-    );
+export const createCampaign = campaign => dispatch => {
+  console.log("new campaign: ", JSON.stringify(campaign));
+  dispatch({
+    type: NEW_CAMPAIGN,
+    payload: campaign
+  });
 };
 
 export const getCampaignById = id => dispatch => {

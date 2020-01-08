@@ -20,10 +20,10 @@ export default function(state = initialState, action) {
     case NEW_CAMPAIGN:
       return {
         ...state,
-        campaign: action.payload
+        campaign: action.payload,
+        campaigns: [...state, action.payload]
       };
     case GET_CAMPAIGN: {
-      console.log("get camp: ", JSON.stringify(action.payload));
       return {
         ...state,
         campaign: action.payload
