@@ -1,5 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { createCampaign } from "../../actions/campaignActions";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import { Button, Divider } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import uuid from "uuid";
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CreateCampaignForm = () => {
+const CreateCampaignForm = ({history}) => {
   const classes = useStyles();
   const [newCampaign, setNewCampaign] = useState({
     name: "",
@@ -73,12 +73,13 @@ const CreateCampaignForm = () => {
       id: uuid()
     };
 
-    dispatch(createCampaign(campaign));
+    dispatch(createCampaign(campaign, history));
 
     setNewCampaign({
       name: "",
       text: "",
-      media: ""
+      media: "",
+      segment_id: ""
     });
   };
 
@@ -106,7 +107,7 @@ const CreateCampaignForm = () => {
               labelId="segment-select-label"
               id="segment-select"
               name="segment_id"
-              value={newCampaign.segment_id || ''}
+              value={newCampaign.segment_id}
               onChange={onChange}
               labelWidth={labelWidth}
             >
@@ -166,4 +167,4 @@ const CreateCampaignForm = () => {
   );
 };
 
-export default CreateCampaignForm;
+export default withRouter(CreateCampaignForm);

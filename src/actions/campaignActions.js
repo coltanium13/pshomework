@@ -12,12 +12,14 @@ export const fetchCampaigns = () => dispatch => {
   });
 };
 
-export const createCampaign = campaign => dispatch => {
+export const createCampaign = (campaign, history) => dispatch => {
   console.log("new campaign: ", JSON.stringify(campaign));
   dispatch({
     type: NEW_CAMPAIGN,
     payload: campaign
   });
+
+  history.push('/campaigns');
 };
 
 export const getCampaignById = id => dispatch => {
