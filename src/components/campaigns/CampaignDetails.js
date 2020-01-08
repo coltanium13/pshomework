@@ -58,8 +58,9 @@ const CampaignDetails = ({ match }) => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className="headings" gutterBottom>
-              Open Campaigns
+              Open Campaigns 
             </Typography>
+            <p>{campaign.name}</p>
           </Grid>
         </Grid>
       </div>

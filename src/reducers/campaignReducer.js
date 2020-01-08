@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         campaign: {
-          ...state.campaigns.find(campaign => campaign.id == action.payload)
+          ...state.campaigns.find(campaign => campaign.id.toString() === action.payload.toString())
         }
       };
     }
@@ -35,7 +35,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         campaigns: [
-          ...state.campaigns.filter(campaign => campaign.id !== action.payload)
+          ...state.campaigns.filter(campaign => campaign.id.toString() !== action.payload.toString())
         ]
       };
     default:
