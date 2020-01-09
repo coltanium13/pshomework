@@ -6,6 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { Button, Divider } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import {
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent
+} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,10 +26,24 @@ const useStyles = makeStyles(theme => ({
   },
   headings: {
     color: "primary"
+  },
+  card: {
+    maxWidth: 345
+  },
+  cardContent: {
+    height: 60
+  },
+  media: {
+    height: 140
+  },
+  textArea: {
+    margin: theme.spacing(1),
+    width: 600
   }
 }));
 
 const CampaignDetails = ({ match }) => {
+  const classes = useStyles();
   const campaignId = match.params.id;
   const dispatch = useDispatch();
 
@@ -40,7 +62,7 @@ const CampaignDetails = ({ match }) => {
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={6}>
             <Typography variant="h4" gutterBottom>
-              Campaigns
+              {campaign.name}
             </Typography>
           </Grid>
           <Grid item xs={6} align="center">
@@ -57,13 +79,72 @@ const CampaignDetails = ({ match }) => {
             <Divider />
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="h6" className="headings" gutterBottom>
-              Open Campaigns 
-            </Typography>
-            <p>{campaign.name}</p>
+            <TextField
+              id="camp-status"
+              label="Status"
+              value={campaign.status || ""}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </Grid>
+          {campaign.status !== "Preview" && <Stats campaign={campaign} />}
+          {campaign.media && (
+            <Grid item xs={12}>
+              <Card className={classes.card}>
+                <CardContent className={classes.cardContent}>
+                  <Typography variant="h6" gutterBottom>
+                    Media
+                  </Typography>
+                </CardContent>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={campaign.media || ""}
+                    title="Media"
+                  />
+                </CardActionArea>
+              </Card>
+            </Grid>
+          )}
+          <Grid item xs={12}>
+            <TextareaAutosize
+              className={classes.textArea}
+              value={campaign.text}
+              aria-label="Message Text"
+              rowsMin={3}
+              readOnly
+            />
           </Grid>
         </Grid>
       </div>
+    </Fragment>
+  );
+};
+
+export const Stats = ({ campaign }) => {
+  return (
+    <Fragment>
+      <Grid item xs={3}>
+        <TextField
+          id="stats-sent"
+          label="Sent"
+          value={campaign.stats ? campaign.stats.sent : "" || ""}
+          InputProps={{
+            readOnly: true
+          }}
+        />
+      </Grid>
+      <Grid item xs={3}>
+        <TextField
+          id="stats-clicked"
+          label="Clicked"
+          value={campaign.stats ? campaign.stats.clicked : "" || ""}
+          InputProps={{
+            readOnly: true
+          }}
+        />
+      </Grid>
     </Fragment>
   );
 };
