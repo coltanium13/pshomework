@@ -19,7 +19,7 @@ export const createCampaign = (campaign, history) => dispatch => {
     payload: campaign
   });
 
-  history.push('/campaigns');
+  history.push("/campaigns");
 };
 
 export const getCampaignById = id => dispatch => {
@@ -30,7 +30,7 @@ export const getCampaignById = id => dispatch => {
   });
 };
 
-export const updateCampaign = campaign => dispatch => {};
+export const updateCampaign = (campaign, history) => dispatch => {};
 
 export const deleteCampaign = id => dispatch => {
   dispatch({
