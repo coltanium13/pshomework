@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCampaignById } from "../../actions/campaignActions";
+import { fetchTags } from "../../actions/tagActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -42,18 +43,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const parseTags = (tags, text) => {
+  return text.replace(/{shop_link}|{first_name}|{shop_name}/g, function(matchedTag) {
+    return tags.find(tag => tag.tag === matchedTag).tag_value;
+  });
+};
+
 const CampaignDetails = ({ match }) => {
   const classes = useStyles();
   const campaignId = match.params.id;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Camp Details Effect!!");
     dispatch(getCampaignById(campaignId));
+    dispatch(fetchTags());
   }, [dispatch, campaignId]);
 
   const { campaign } = useSelector(state => ({
     ...state.campaigns
+  }));
+
+  const { tags } = useSelector(state => ({
+    ...state.tags
   }));
 
   return (
@@ -110,7 +121,7 @@ const CampaignDetails = ({ match }) => {
           <Grid item xs={12}>
             <TextareaAutosize
               className={classes.textArea}
-              value={campaign.text}
+              value={parseTags(tags, campaign.text)}
               aria-label="Message Text"
               rowsMin={3}
               readOnly

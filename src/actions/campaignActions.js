@@ -4,7 +4,6 @@ import {
   GET_CAMPAIGN,
   DELETE_CAMPAIGN
 } from "./types";
-import _ from "lodash";
 
 export const fetchCampaigns = () => dispatch => {
   dispatch({
@@ -13,7 +12,6 @@ export const fetchCampaigns = () => dispatch => {
 };
 
 export const createCampaign = (campaign, history) => dispatch => {
-  console.log("new campaign: ", JSON.stringify(campaign));
   dispatch({
     type: NEW_CAMPAIGN,
     payload: campaign
@@ -23,7 +21,6 @@ export const createCampaign = (campaign, history) => dispatch => {
 };
 
 export const getCampaignById = id => dispatch => {
-  console.log(JSON.stringify("getCampaignById: "), id);
   dispatch({
     type: GET_CAMPAIGN,
     payload: id
