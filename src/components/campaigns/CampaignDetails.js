@@ -44,9 +44,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const parseTags = (tags, text) => {
-  return text.replace(/{shop_link}|{first_name}|{shop_name}/g, function(matchedTag) {
+  return text && (text.replace(/{shop_link}|{first_name}|{shop_name}/g, function(matchedTag) {
     return tags.find(tag => tag.tag === matchedTag).tag_value;
-  });
+  }));
 };
 
 const CampaignDetails = ({ match }) => {
