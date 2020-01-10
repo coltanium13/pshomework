@@ -52,6 +52,7 @@ const EditCampaign = ({ match, history }) => {
     media: "",
     status: "",
     segment_id: "",
+    tag: "",
     id: campaign.id
   });
 
@@ -75,7 +76,8 @@ const EditCampaign = ({ match, history }) => {
       segment_id: campaign.segment_id,
       id: campaign.id
     });
-  }, [dispatch, campaignId]);
+  }, [dispatch, campaign.name, campaign.text,
+     campaign.media, campaign.status, campaign.segment_id, campaign.id, campaignId]);
 
   const onChange = e => {
     setFormData({
@@ -170,7 +172,7 @@ const EditCampaign = ({ match, history }) => {
             <Select
               labelId="tag-label"
               id="tag-select-filled"
-              value="Add Tag"
+              value={formData.tag || ""}
               onChange={handleTagChange}
             >
               <MenuItem value="">

@@ -44,6 +44,7 @@ const CreateCampaignForm = ({ history }) => {
     name: "",
     text: "",
     media: "",
+    tag: "",
     status: "Preview",
     segment_id: ""
   });
@@ -131,6 +132,18 @@ const CreateCampaignForm = ({ history }) => {
             </Select>
           </FormControl>
         </div>
+        {newCampaign.media && (
+          <div>
+            <TextField
+              id="camp-media"
+              label="Media"
+              value={newCampaign.media || ""}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </div>
+        )}
         <div>
           <input
             accept="image/*"
@@ -160,7 +173,7 @@ const CreateCampaignForm = ({ history }) => {
             <Select
               labelId="tag-label"
               id="tag-select-filled"
-              value="Add Tag"
+              value={newCampaign.tag || ""}
               onChange={handleTagChange}
             >
               <MenuItem value="">

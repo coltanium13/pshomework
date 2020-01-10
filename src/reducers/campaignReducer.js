@@ -16,7 +16,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_CAMPAIGNS:
       return {
-        ...state
+        ...state,
+        campaigns: [...state.campaigns]
       };
     case NEW_CAMPAIGN:
       return {
@@ -44,7 +45,8 @@ export default function(state = initialState, action) {
           ...state.campaigns.find(
             campaign => campaign.id.toString() === action.payload.toString()
           )
-        }
+        },
+        campaigns: [...state.campaigns]
       };
     }
     case DELETE_CAMPAIGN:

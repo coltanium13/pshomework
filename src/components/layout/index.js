@@ -51,9 +51,7 @@ const MainLayout = ({ children }) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            <Link className={classes.link} to="/">
-              PS Homework CG
-            </Link>
+            PS Homework CG
           </Typography>
         </Toolbar>
       </AppBar>
