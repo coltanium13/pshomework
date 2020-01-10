@@ -1,0 +1,22 @@
+{
+  "tags": [
+    {
+      "id": 1,
+      "name": "Shop Link",
+      "tag": "{shop_link}",
+      "tag_value": "Coltanium13.shopify.com"
+    },
+    {
+      "id": 2,
+      "name": "First Name",
+      "tag": "{first_name}",
+      "tag_value": "Colton"
+    },
+    {
+      "id": 3,
+      "name": "Shop Name",
+      "tag": "{shop_name}",
+      "tag_value": "Coltanium13 Swag"
+    }
+  ]
+}

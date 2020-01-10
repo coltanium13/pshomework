@@ -1,0 +1,7 @@
+{
+  "segments": [
+    { "id": 1, "name": "All Subscribers", "subscribers_count": 8920 },
+    { "id": 2, "name": "Beauty Purchases", "subscribers_count": 7108 },
+    { "id": 3, "name": "Decor Purchases", "subscribers_count": 1204 }
+  ]
+}

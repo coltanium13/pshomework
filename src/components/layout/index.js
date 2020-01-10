@@ -52,7 +52,7 @@ const MainLayout = ({ children }) => {
         <Toolbar>
           <Typography variant="h6" noWrap>
             <Link className={classes.link} to="/">
-              Blog Posts
+              PS Homework CG
             </Link>
           </Typography>
         </Toolbar>
