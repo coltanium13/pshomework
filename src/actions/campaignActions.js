@@ -2,7 +2,8 @@ import {
   FETCH_CAMPAIGNS,
   NEW_CAMPAIGN,
   GET_CAMPAIGN,
-  DELETE_CAMPAIGN
+  DELETE_CAMPAIGN,
+  UPDATE_CAMPAIGN
 } from "./types";
 
 export const fetchCampaigns = () => dispatch => {
@@ -27,7 +28,14 @@ export const getCampaignById = id => dispatch => {
   });
 };
 
-export const updateCampaign = (campaign, history) => dispatch => {};
+export const updateCampaign = (campaign, history) => dispatch => {
+  dispatch({
+    type: UPDATE_CAMPAIGN,
+    payload: campaign
+  });
+
+  history.push("/campaigns");
+};
 
 export const deleteCampaign = id => dispatch => {
   dispatch({

@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { createCampaign } from "../../actions/campaignActions";
+import { fetchTags } from "../../actions/tagActions";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Typography from "@material-ui/core/Typography";
-import { Button, Divider } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import uuid from "uuid";
+import insertTextAtCursor from "insert-text-at-cursor";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CreateCampaignForm = ({history}) => {
+const CreateCampaignForm = ({ history }) => {
   const classes = useStyles();
   const [newCampaign, setNewCampaign] = useState({
     name: "",
@@ -47,18 +49,27 @@ const CreateCampaignForm = ({history}) => {
   });
 
   const dispatch = useDispatch();
-
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+    dispatch(fetchTags());
+  }, [dispatch]);
+
+  const inputLabel = React.useRef(null);
+  const textArea = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  const { tags } = useSelector(state => ({
+    ...state.tags
+  }));
 
   const onChange = e => {
     setNewCampaign({
       ...newCampaign,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleTagChange = e => {
+    insertTextAtCursor(textArea.current, e.target.value);
   };
 
   const onSubmit = e => {
@@ -144,7 +155,28 @@ const CreateCampaignForm = ({history}) => {
           </label>
         </div>
         <div>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="tag-input-label">Add Tag</InputLabel>
+            <Select
+              labelId="tag-label"
+              id="tag-select-filled"
+              value="Add Tag"
+              onChange={handleTagChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {tags.map(tag => (
+                <MenuItem key={tag.id} value={tag.tag}>
+                  {tag.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div>
           <TextareaAutosize
+            ref={textArea}
             className={classes.textArea}
             name="text"
             value={newCampaign.text}

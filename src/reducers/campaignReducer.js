@@ -2,7 +2,8 @@ import {
   FETCH_CAMPAIGNS,
   NEW_CAMPAIGN,
   GET_CAMPAIGN,
-  DELETE_CAMPAIGN
+  DELETE_CAMPAIGN,
+  UPDATE_CAMPAIGN
 } from "../actions/types";
 import data from "./data/campaigns.json";
 
@@ -23,11 +24,26 @@ export default function(state = initialState, action) {
         campaign: action.payload,
         campaigns: [...state.campaigns, action.payload]
       };
+    case UPDATE_CAMPAIGN: {
+      return {
+        ...state,
+        campaigns: [
+          ...state.campaigns.map(c =>
+            c.id.toString() === action.payload.id.toString()
+              ? { ...action.payload }
+              : c
+          )
+        ],
+        campaign: action.payload
+      };
+    }
     case GET_CAMPAIGN: {
       return {
         ...state,
         campaign: {
-          ...state.campaigns.find(campaign => campaign.id.toString() === action.payload.toString())
+          ...state.campaigns.find(
+            campaign => campaign.id.toString() === action.payload.toString()
+          )
         }
       };
     }
@@ -35,7 +51,9 @@ export default function(state = initialState, action) {
       return {
         ...state,
         campaigns: [
-          ...state.campaigns.filter(campaign => campaign.id.toString() !== action.payload.toString())
+          ...state.campaigns.filter(
+            campaign => campaign.id.toString() !== action.payload.toString()
+          )
         ]
       };
     default:

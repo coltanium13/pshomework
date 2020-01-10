@@ -5,12 +5,14 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Typography from "@material-ui/core/Typography";
-import { Button, Divider } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getCampaignById, updateCampaign } from "../../actions/campaignActions";
+import { fetchTags } from "../../actions/tagActions";
+import insertTextAtCursor from "insert-text-at-cursor";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,11 +54,17 @@ const EditCampaign = ({ match, history }) => {
     segment_id: "",
     id: campaign.id
   });
+
   const inputLabel = React.useRef(null);
+  const textArea = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
+  const { tags } = useSelector(state => ({
+    ...state.tags
+  }));
 
   useEffect(() => {
     dispatch(getCampaignById(campaignId));
+    dispatch(fetchTags());
     setLabelWidth(inputLabel.current.offsetWidth);
 
     setFormData({
@@ -64,7 +72,8 @@ const EditCampaign = ({ match, history }) => {
       text: campaign.text,
       media: !campaign.media ? "" : campaign.media,
       status: campaign.status,
-      segment_id: campaign.segment_id
+      segment_id: campaign.segment_id,
+      id: campaign.id
     });
   }, [dispatch, campaignId]);
 
@@ -73,6 +82,10 @@ const EditCampaign = ({ match, history }) => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleTagChange = e => {
+    insertTextAtCursor(textArea.current, e.target.value);
   };
 
   const onSubmit = e => {
@@ -89,6 +102,7 @@ const EditCampaign = ({ match, history }) => {
       <form className={classes.root} onSubmit={onSubmit}>
         <div>
           <TextField
+            ref={textArea}
             required
             name="name"
             id="name-input"
@@ -149,6 +163,26 @@ const EditCampaign = ({ match, history }) => {
               Edit Media
             </Button>
           </label>
+        </div>
+        <div>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="tag-input-label">Add Tag</InputLabel>
+            <Select
+              labelId="tag-label"
+              id="tag-select-filled"
+              value="Add Tag"
+              onChange={handleTagChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {tags.map(tag => (
+                <MenuItem key={tag.id} value={tag.tag}>
+                  {tag.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <div>
           <TextareaAutosize
