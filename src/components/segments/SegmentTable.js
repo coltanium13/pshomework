@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,6 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { Link as RouterLink } from "react-router-dom";
+import { deleteSegment } from "../../actions/segmentActions";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -24,6 +28,17 @@ const useStyles = makeStyles(theme => ({
 
 const SegmentTable = ({ segments }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleDeleteSegment = id => {
+    //TODO: bring in campaigns
+    //and check to make sure it is not used by any campaigns.
+    //if it is, pop up saying it cant be deleted.
+    //if not used, ask if sure they want to delete
+    if (window.confirm("Are you sure you want to delete this Segment?")) {
+      dispatch(deleteSegment(id));
+    }
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -34,17 +49,40 @@ const SegmentTable = ({ segments }) => {
             <TableCell className={classes.headcell} align="center">
               Subscriber Count
             </TableCell>
+            <TableCell className={classes.headcell} align="center">
+              Action
+            </TableCell>
+            <TableCell className={classes.headcell} align="right" />
           </TableRow>
         </TableHead>
         <TableBody>
-          {segments.map(seg => (
-            <TableRow key={seg.id}>
+          {segments.map(segment => (
+            <TableRow key={segment.id}>
               <TableCell component="th" scope="row">
                 <Typography variant="h6" gutterBottom>
-                  {seg.name}
+                  {segment.name}
                 </Typography>
               </TableCell>
-              <TableCell align="center">{seg.subscribers_count}</TableCell>
+              <TableCell align="center">{segment.subscribers_count}</TableCell>
+              <TableCell align="center">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                  component={RouterLink}
+                  to={`/edit-segment/${segment.id}`}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => handleDeleteSegment(segment.id)}
+                >
+                  Del
+                </Button>
+              </TableCell>
+              <TableCell align="center" />
             </TableRow>
           ))}
         </TableBody>

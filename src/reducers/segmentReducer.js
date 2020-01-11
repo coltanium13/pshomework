@@ -1,4 +1,9 @@
-import { FETCH_SEGMENTS, GET_SEGMENT } from "../actions/types";
+import {
+  FETCH_SEGMENTS,
+  GET_SEGMENT,
+  NEW_SEGMENT,
+  DELETE_SEGMENT
+} from "../actions/types";
 import data from "./data/segments.json";
 
 const initialState = {
@@ -13,6 +18,12 @@ export default function(state = initialState, action) {
         ...state,
         segments: [...state.segments]
       };
+    case NEW_SEGMENT:
+      return {
+        ...state,
+        segments: [...state.segments, action.payload],
+        segment: action.payload
+      };
     case GET_SEGMENT: {
       return {
         ...state,
@@ -24,6 +35,15 @@ export default function(state = initialState, action) {
         segments: [...state.segments]
       };
     }
+    case DELETE_SEGMENT:
+      return {
+        ...state,
+        segments: [
+          ...state.segments.filter(
+            segment => segment.id.toString() !== action.payload.toString()
+          )
+        ]
+      };
     default:
       return state;
   }

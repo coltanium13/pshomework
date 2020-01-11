@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCampaignById } from "../../actions/campaignActions";
+import { getSegmentById } from "../../actions/segmentActions";
 import { fetchTags } from "../../actions/tagActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -60,10 +61,17 @@ const CampaignDetails = ({ match }) => {
   useEffect(() => {
     dispatch(getCampaignById(campaignId));
     dispatch(fetchTags());
+    if (campaign.segment_id) {
+      dispatch(getSegmentById(campaign.segment_id));
+    }
   }, [dispatch, campaignId]);
 
   const { campaign } = useSelector(state => ({
     ...state.campaigns
+  }));
+
+  const { segment } = useSelector(state => ({
+    ...state.segments
   }));
 
   const { tags } = useSelector(state => ({
@@ -102,6 +110,16 @@ const CampaignDetails = ({ match }) => {
           />
         </Grid>
         {campaign.status !== "Preview" && <Stats campaign={campaign} />}
+        <Grid item xs={12}>
+          <TextField
+            id="camp-segment"
+            label="Segment"
+            value={segment.name || ""}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+        </Grid>
         {campaign.media && (
           <Grid item xs={12}>
             <Card className={classes.card}>

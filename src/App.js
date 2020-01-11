@@ -9,6 +9,7 @@ import Layout from "./components/layout";
 import Segments from "./components/segments/Segments";
 import CampaignDetails from "./components/campaigns/CampaignDetails";
 import EditCampaign from "./components/campaigns/EditCampaign";
+import CreateSegmentForm from "./components/segments/CreateSegmentForm";
 
 import store from "./store";
 
@@ -26,6 +27,11 @@ class App extends Component {
                 exact
                 path="/create-campaign"
                 component={CreateCampaignForm}
+              />
+              <Route
+                exact
+                path="/create-segment"
+                component={CreateSegmentForm}
               />
               <Route
                 exact

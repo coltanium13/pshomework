@@ -13,6 +13,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getCampaignById, updateCampaign } from "../../actions/campaignActions";
 import { fetchTags } from "../../actions/tagActions";
+import { fetchSegments } from "../../actions/segmentActions";
 import insertTextAtCursor from "insert-text-at-cursor";
 import CampaignPreviewer from "./CampaignPreviewer";
 
@@ -48,6 +49,10 @@ const EditCampaign = ({ match, history }) => {
     ...state.campaigns
   }));
 
+  const { segments } = useSelector(state => ({
+    ...state.segments
+  }));
+
   const [formData, setFormData] = useState({
     name: "",
     text: "",
@@ -68,6 +73,7 @@ const EditCampaign = ({ match, history }) => {
   useEffect(() => {
     dispatch(getCampaignById(campaignId));
     dispatch(fetchTags());
+    dispatch(fetchSegments());
     setLabelWidth(inputLabel.current.offsetWidth);
 
     setFormData({
@@ -143,9 +149,11 @@ const EditCampaign = ({ match, history }) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {segments.map(segment => (
+                    <MenuItem key={segment.id} value={segment.id}>
+                      {segment.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </div>

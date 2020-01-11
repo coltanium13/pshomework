@@ -6,3 +6,5 @@ export const DELETE_CAMPAIGN = "DELETE_CAMPAIGN";
 export const FETCH_TAGS = "FETCH_TAGS";
 export const FETCH_SEGMENTS = "FETCH_SEGMENTS";
 export const GET_SEGMENT = "GET_SEGMENT";
+export const NEW_SEGMENT = "NEW_SEGMENT";
+export const DELETE_SEGMENT = "DELETE_SEGMENT";
