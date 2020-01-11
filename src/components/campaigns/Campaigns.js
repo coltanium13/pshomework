@@ -31,7 +31,7 @@ const Campaigns = () => {
 
   useEffect(() => {
     dispatch(fetchCampaigns());
-  }, [dispatch, fetch]);
+  }, [dispatch]);
 
   return (
     <div className={classes.root}>
