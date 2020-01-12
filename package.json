@@ -25,5 +25,16 @@
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "redux-mock-store": "^1.5.4",
+    "sinon": "^8.0.4"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "src/setupTests.js"
+    ]
+  }
 }

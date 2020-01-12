@@ -1,10 +1,7 @@
-import {
-  FETCH_TAGS
-} from "../actions/types";
-import data from "./data/tags.json";
+import { FETCH_TAGS } from "../actions/types";
 
 const initialState = {
-  tags: data.tags,
+  tags: [],
   tag: {}
 };
 
@@ -12,7 +9,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_TAGS:
       return {
-        ...state
+        ...state,
+        tags: action.payload
       };
     default:
       return state;

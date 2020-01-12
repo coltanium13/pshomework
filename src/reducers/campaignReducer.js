@@ -8,7 +8,7 @@ import {
 import data from "./data/campaigns.json";
 
 const initialState = {
-  campaigns: data.campaigns,
+  campaigns: [],
   campaign: {}
 };
 
@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
     case FETCH_CAMPAIGNS:
       return {
         ...state,
-        campaigns: [...state.campaigns]
+        campaigns: [...action.payload]
       };
     case NEW_CAMPAIGN:
       return {

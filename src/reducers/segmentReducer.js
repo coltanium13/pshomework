@@ -4,10 +4,9 @@ import {
   NEW_SEGMENT,
   DELETE_SEGMENT
 } from "../actions/types";
-import data from "./data/segments.json";
 
 const initialState = {
-  segments: data.segments,
+  segments: [],
   segment: {}
 };
 
@@ -16,7 +15,7 @@ export default function(state = initialState, action) {
     case FETCH_SEGMENTS:
       return {
         ...state,
-        segments: [...state.segments]
+        segments: [...action.payload]
       };
     case NEW_SEGMENT:
       return {

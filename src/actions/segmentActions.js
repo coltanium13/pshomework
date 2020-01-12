@@ -4,10 +4,12 @@ import {
   NEW_SEGMENT,
   DELETE_SEGMENT
 } from "./types";
+import data from "../reducers/data/segments.json";
 
 export const fetchSegments = () => dispatch => {
   dispatch({
-    type: FETCH_SEGMENTS
+    type: FETCH_SEGMENTS,
+    payload: data.segments
   });
 };
 
