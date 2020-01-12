@@ -58,7 +58,7 @@ const CampaignPreviewer = ({ campaign: { text, media } }) => {
     ...state.tags
   }));
 
-  return (
+  return media || text ? (
     <div>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
@@ -67,20 +67,22 @@ const CampaignPreviewer = ({ campaign: { text, media } }) => {
           </Typography>
         </CardContent>
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={media || ""}
-            title="Media"
-          />
+          {media ? (
+            <CardMedia
+              className={classes.media}
+              image={media || ""}
+              title="Media"
+            />
+          ) : null}
           <CardContent>
-          <Typography variant="body2" component="p" gutterBottom>
-            {parseTags(tags,text)}
-          </Typography>
-        </CardContent>
+            <Typography variant="body2" component="p" gutterBottom>
+              {parseTags(tags, text)}
+            </Typography>
+          </CardContent>
         </CardActionArea>
       </Card>
     </div>
-  );
+  ) : null;
 };
 
 export default CampaignPreviewer;

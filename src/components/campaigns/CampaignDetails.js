@@ -58,14 +58,6 @@ const CampaignDetails = ({ match }) => {
   const campaignId = match.params.id;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCampaignById(campaignId));
-    dispatch(fetchTags());
-    if (campaign.segment_id) {
-      dispatch(getSegmentById(campaign.segment_id));
-    }
-  }, [dispatch, campaignId]);
-
   const { campaign } = useSelector(state => ({
     ...state.campaigns
   }));
@@ -77,6 +69,14 @@ const CampaignDetails = ({ match }) => {
   const { tags } = useSelector(state => ({
     ...state.tags
   }));
+
+  useEffect(() => {
+    dispatch(getCampaignById(campaignId));
+    dispatch(fetchTags());
+    if (campaign.segment_id) {
+      dispatch(getSegmentById(campaign.segment_id));
+    }
+  }, [dispatch, campaignId, campaign.segment_id]);
 
   return (
     <div>

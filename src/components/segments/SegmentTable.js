@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link as RouterLink } from "react-router-dom";
 import { deleteSegment } from "../../actions/segmentActions";
+import { fetchCampaigns } from "../../actions/campaignActions";
 import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -30,11 +31,23 @@ const SegmentTable = ({ segments }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const { campaigns } = useSelector(state => ({
+    ...state.campaigns
+  }));
+
+  useEffect(() => {
+    dispatch(fetchCampaigns());
+  }, [dispatch]);
+
   const handleDeleteSegment = id => {
     //TODO: bring in campaigns
     //and check to make sure it is not used by any campaigns.
     //if it is, pop up saying it cant be deleted.
     //if not used, ask if sure they want to delete
+    if (campaigns.find(c => c.segment_id.toString() === id.toString())) {
+      window.alert(`Cannot delete because a campaign is using it.`);
+      return;
+    }
     if (window.confirm("Are you sure you want to delete this Segment?")) {
       dispatch(deleteSegment(id));
     }

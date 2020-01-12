@@ -209,7 +209,7 @@ const EditCampaign = ({ match, history }) => {
                 </Select>
               </FormControl>
             </div>
-            <Grid container spacing={12}>
+            <Grid container spacing={3}>
               <Grid item xs>
                 <TextareaAutosize
                   className={classes.textArea}
