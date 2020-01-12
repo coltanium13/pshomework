@@ -93,4 +93,4 @@ const CampaignTable = ({ campaigns, status }) => {
   );
 };
 
-export default withRouter(CampaignTable);
+export default CampaignTable;

@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCampaignById } from "../../actions/campaignActions";
-import { getSegmentById } from "../../actions/segmentActions";
+import { getSegmentById, fetchSegments } from "../../actions/segmentActions";
 import { fetchTags } from "../../actions/tagActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -62,7 +62,7 @@ const CampaignDetails = ({ match }) => {
     ...state.campaigns
   }));
 
-  const { segment } = useSelector(state => ({
+  const { segment, segments } = useSelector(state => ({
     ...state.segments
   }));
 
@@ -73,6 +73,7 @@ const CampaignDetails = ({ match }) => {
   useEffect(() => {
     dispatch(getCampaignById(campaignId));
     dispatch(fetchTags());
+    dispatch(fetchSegments());
     if (campaign.segment_id) {
       dispatch(getSegmentById(campaign.segment_id));
     }

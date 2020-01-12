@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { act } from "react-dom/test-utils";
-import { shallow, mount } from "enzyme";
-import Campaigns from "./Campaigns";
+import { shallow } from "enzyme";
+import CampaignTable from "./CampaignTable";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
+import data from "../../reducers/data/campaigns.json";
 const mockStore = configureStore();
 
 const store = mockStore({
@@ -12,15 +11,14 @@ const store = mockStore({
   campaign: {}
 });
 
-describe("Campaigns", () => {
+describe("CampaignTable", () => {
   describe("In General", () => {
-    it("renders campaigns without crashing", () => {
+    it("renders campaign table without crashing", () => {
       const wrapper = shallow(
         <Provider store={store}>
-          <Campaigns />
+          <CampaignTable campaigns={data.campaigns} status="Preview" />
         </Provider>
       );
-      //console.log("wrapper: ", wrapper.debug());
       expect(wrapper.length).toEqual(1);
     });
   });
