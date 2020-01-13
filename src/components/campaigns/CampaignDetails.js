@@ -62,7 +62,7 @@ const CampaignDetails = ({ match }) => {
     ...state.campaigns
   }));
 
-  const { segment, segments } = useSelector(state => ({
+  const { segment } = useSelector(state => ({
     ...state.segments
   }));
 

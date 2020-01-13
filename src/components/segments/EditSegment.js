@@ -42,11 +42,13 @@ const EditSegment = ({ match, history }) => {
 
   useEffect(() => {
     dispatch(getSegmentById(segmentId));
-    setFormData({
-      name: segment.name,
-      subscribers_count: segment.subscribers_count,
-      id: segment.id
-    });
+    if(segment.name){
+      setFormData({
+        name: segment.name,
+        subscribers_count: segment.subscribers_count,
+        id: segment.id
+      });
+    }
   }, [
     dispatch,
     segmentId,
