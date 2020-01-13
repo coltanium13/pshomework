@@ -83,7 +83,7 @@ const SegmentTable = ({ segments }) => {
                   color="primary"
                   className={classes.btn}
                   component={RouterLink}
-                  to={`/edit-segment/${segment.id}`}
+                  to={`/segments/edit/${segment.id}`}
                 >
                   Edit
                 </Button>

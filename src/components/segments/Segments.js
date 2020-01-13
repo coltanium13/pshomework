@@ -46,7 +46,7 @@ const Segments = () => {
             variant="contained"
             color="primary"
             component={Link}
-            to={"/create-segment"}
+            to={"/segments/create"}
           >
             Create New Segment
           </Button>

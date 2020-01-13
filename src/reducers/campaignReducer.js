@@ -5,7 +5,6 @@ import {
   DELETE_CAMPAIGN,
   UPDATE_CAMPAIGN
 } from "../actions/types";
-import data from "./data/campaigns.json";
 
 const initialState = {
   campaigns: [],
@@ -14,11 +13,15 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_CAMPAIGNS:
-      return {
-        ...state,
-        campaigns: [...action.payload]
-      };
+    case FETCH_CAMPAIGNS: {
+      if (state.campaigns.length < 1) {
+        return {
+          ...state,
+          campaigns: [...action.payload]
+        };
+      }
+      return {...state};
+    }
     case NEW_CAMPAIGN:
       return {
         ...state,

@@ -2,7 +2,8 @@ import {
   FETCH_SEGMENTS,
   GET_SEGMENT,
   NEW_SEGMENT,
-  DELETE_SEGMENT
+  DELETE_SEGMENT,
+  UPDATE_SEGMENT
 } from "./types";
 import data from "../reducers/data/segments.json";
 
@@ -27,6 +28,15 @@ export const getSegmentById = id => dispatch => {
     type: GET_SEGMENT,
     payload: id
   });
+};
+
+export const updateSegment = (segment, history) => dispatch => {
+  dispatch({
+    type: UPDATE_SEGMENT,
+    payload: segment
+  });
+
+  history.push("/segments");
 };
 
 export const deleteSegment = id => dispatch => {

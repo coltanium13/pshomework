@@ -92,7 +92,7 @@ const CampaignDetails = ({ match }) => {
             variant="contained"
             color="primary"
             component={Link}
-            to={`/edit-campaign/${campaign.id}`}
+            to={`/campaigns/edit/${campaign.id}`}
           >
             Edit Campaign
           </Button>

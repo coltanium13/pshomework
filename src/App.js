@@ -10,6 +10,7 @@ import Segments from "./components/segments/Segments";
 import CampaignDetails from "./components/campaigns/CampaignDetails";
 import EditCampaign from "./components/campaigns/EditCampaign";
 import CreateSegmentForm from "./components/segments/CreateSegmentForm";
+import EditSegment from "./components/segments/EditSegment";
 
 import store from "./store";
 
@@ -23,22 +24,15 @@ class App extends Component {
               <Redirect exact from="/" to="campaigns" />
               <Route exact path="/campaigns" component={Campaigns} />
               <Route exact path="/segments" component={Segments} />
+              <Route exact path="/campaigns/create" component={CreateCampaignForm} />
+              <Route exact path="/segments/create" component={CreateSegmentForm} />
               <Route
-                exact
-                path="/create-campaign"
-                component={CreateCampaignForm}
-              />
-              <Route
-                exact
-                path="/create-segment"
-                component={CreateSegmentForm}
-              />
-              <Route
-                exact
-                path="/view-campaign/:id"
+              exact
+                path="/campaigns/details/:id"
                 component={CampaignDetails}
               />
-              <Route exact path="/edit-campaign/:id" component={EditCampaign} />
+              <Route exact path="/segments/edit/:id" component={EditSegment} />
+              <Route exact path="/campaigns/edit/:id" component={EditCampaign} />
             </Fragment>
           </Layout>
         </Router>

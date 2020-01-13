@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { createSegment } from "../../actions/segmentActions";
-import { fetchTags } from "../../actions/tagActions";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
@@ -66,7 +60,7 @@ const CreateSegmentForm = ({ history }) => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Add Campaign
+        Add Segment
       </Typography>
       <form className={classes.root} onSubmit={onSubmit}>
         <div>

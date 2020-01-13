@@ -7,4 +7,5 @@ export const FETCH_TAGS = "FETCH_TAGS";
 export const FETCH_SEGMENTS = "FETCH_SEGMENTS";
 export const GET_SEGMENT = "GET_SEGMENT";
 export const NEW_SEGMENT = "NEW_SEGMENT";
+export const UPDATE_SEGMENT = "UPDATE_SEGMENT";
 export const DELETE_SEGMENT = "DELETE_SEGMENT";
