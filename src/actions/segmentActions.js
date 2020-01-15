@@ -6,6 +6,7 @@ import {
   UPDATE_SEGMENT
 } from "./types";
 import data from "../reducers/data/segments.json";
+import { createAlert } from "./alertActions";
 
 export const fetchSegments = () => dispatch => {
   dispatch({
@@ -19,6 +20,8 @@ export const createSegment = (segment, history) => dispatch => {
     type: NEW_SEGMENT,
     payload: segment
   });
+
+  dispatch(createAlert("Segment created successfully!", "success"));
 
   history.push("/segments");
 };

@@ -13,6 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PeopleIcon from "@material-ui/icons/People";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
+import AlertPop from "./AlertPop";
 
 const drawerWidth = 240;
 
@@ -83,6 +84,7 @@ const MainLayout = ({ children }) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <AlertPop />
         {children}
       </main>
     </div>

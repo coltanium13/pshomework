@@ -6,6 +6,7 @@ import {
   UPDATE_CAMPAIGN
 } from "./types";
 import data from "../reducers/data/campaigns.json";
+import { createAlert } from "./alertActions";
 
 export const fetchCampaigns = () => dispatch => {
   dispatch({
@@ -19,6 +20,8 @@ export const createCampaign = (campaign, history) => dispatch => {
     type: NEW_CAMPAIGN,
     payload: campaign
   });
+
+  dispatch(createAlert("Campaign created successfully!", "success"));
 
   history.push("/campaigns");
 };

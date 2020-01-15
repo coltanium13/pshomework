@@ -9,3 +9,5 @@ export const GET_SEGMENT = "GET_SEGMENT";
 export const NEW_SEGMENT = "NEW_SEGMENT";
 export const UPDATE_SEGMENT = "UPDATE_SEGMENT";
 export const DELETE_SEGMENT = "DELETE_SEGMENT";
+export const CREATE_ALERT = "CREATE_ALERT";
+export const DELETE_ALERT = "DELETE_ALERT";
