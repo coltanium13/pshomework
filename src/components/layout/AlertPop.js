@@ -50,6 +50,7 @@ const AlertPop = () => {
               variant="filled"
               key={alert.id}
               severity={alert.alertType}
+              onClose={(e, r) => handleClose(e, r, alert.id)}
             >
               {alert.msg}
             </MuiAlert>
