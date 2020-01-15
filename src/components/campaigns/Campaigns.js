@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
 const Campaigns = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { campaigns, campaign } = useSelector(state => ({
+  const { campaigns } = useSelector(state => ({
     ...state.campaigns
   }));
 
   useEffect(() => {
     dispatch(fetchCampaigns());
-  }, [dispatch, fetch]);
+  }, [dispatch]);
 
   return (
     <div className={classes.root}>
@@ -46,7 +46,7 @@ const Campaigns = () => {
             variant="contained"
             color="primary"
             component={Link}
-            to={"/create-campaign"}
+            to={"/campaigns/create"}
           >
             Create New Campaign
           </Button>

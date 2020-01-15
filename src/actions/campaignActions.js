@@ -5,10 +5,12 @@ import {
   DELETE_CAMPAIGN,
   UPDATE_CAMPAIGN
 } from "./types";
+import data from "../reducers/data/campaigns.json";
 
 export const fetchCampaigns = () => dispatch => {
   dispatch({
-    type: FETCH_CAMPAIGNS
+    type: FETCH_CAMPAIGNS,
+    payload: data.campaigns
   });
 };
 

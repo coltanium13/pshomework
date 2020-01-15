@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { createCampaign } from "../../actions/campaignActions";
 import { fetchTags } from "../../actions/tagActions";
+import { fetchSegments } from "../../actions/segmentActions";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
@@ -44,6 +45,7 @@ const CreateCampaignForm = ({ history }) => {
     name: "",
     text: "",
     media: "",
+    tag: "",
     status: "Preview",
     segment_id: ""
   });
@@ -52,6 +54,7 @@ const CreateCampaignForm = ({ history }) => {
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
     dispatch(fetchTags());
+    dispatch(fetchSegments());
   }, [dispatch]);
 
   const inputLabel = React.useRef(null);
@@ -59,6 +62,9 @@ const CreateCampaignForm = ({ history }) => {
   const [labelWidth, setLabelWidth] = React.useState(0);
   const { tags } = useSelector(state => ({
     ...state.tags
+  }));
+  const { segment, segments } = useSelector(state => ({
+    ...state.segments
   }));
 
   const onChange = e => {
@@ -125,12 +131,26 @@ const CreateCampaignForm = ({ history }) => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {segments.map(segment => (
+                <MenuItem key={segment.id} value={segment.id}>
+                  {segment.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
+        {newCampaign.media && (
+          <div>
+            <TextField
+              id="camp-media"
+              label="Media"
+              value={newCampaign.media || ""}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </div>
+        )}
         <div>
           <input
             accept="image/*"
@@ -160,7 +180,7 @@ const CreateCampaignForm = ({ history }) => {
             <Select
               labelId="tag-label"
               id="tag-select-filled"
-              value="Add Tag"
+              value={newCampaign.tag || ""}
               onChange={handleTagChange}
             >
               <MenuItem value="">

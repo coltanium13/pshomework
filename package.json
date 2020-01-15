@@ -1,5 +1,5 @@
 {
-  "name": "pshw-1-9",
+  "name": "pshw-1-13-2020",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,9 +21,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "redux-mock-store": "^1.5.4",
+    "sinon": "^8.0.4"
+  }
 }

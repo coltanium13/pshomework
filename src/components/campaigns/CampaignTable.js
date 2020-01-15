@@ -60,7 +60,7 @@ const CampaignTable = ({ campaigns, status }) => {
                 <TableCell component="th" scope="row">
                   <Link
                     component={RouterLink}
-                    to={`/view-campaign/${campaign.id}`}
+                    to={`/campaigns/details/${campaign.id}`}
                   >
                     {campaign.name}
                   </Link>
@@ -72,7 +72,7 @@ const CampaignTable = ({ campaigns, status }) => {
                     color="primary"
                     className={classes.btn}
                     component={RouterLink}
-                    to={`/edit-campaign/${campaign.id}`}
+                    to={`/campaigns/edit/${campaign.id}`}
                   >
                     Edit
                   </Button>
@@ -93,4 +93,4 @@ const CampaignTable = ({ campaigns, status }) => {
   );
 };
 
-export default withRouter(CampaignTable);
+export default CampaignTable;
